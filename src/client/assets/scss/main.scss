@@ -1,0 +1,25 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 80%;
+
+  header {
+    display: flex;
+    flex-direction: row;
+    background: aliceblue;
+    margin-top: 15px;
+    padding: 10px;
+
+    h3 {
+      flex-grow: 1;
+
+      & + div {
+        align-content: center;
+        align-items: center;
+        display: flex;
+        flex-grow: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The Wilson Post</title>
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div id="root"><%- content %></div>
+    <script>
+      window.__INITIAL_STATE__ = <%- JSON.stringify(data) %>;
+    </script>
+    <script src="/static/vendor.js"></script>
+    <script src="/static/styles.js"></script>
+    <script src="/static/main.js"></script>
+  </body>
+</html>
