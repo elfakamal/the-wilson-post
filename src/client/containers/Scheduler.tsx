@@ -1,4 +1,5 @@
 import { Post, State } from 'common';
+import * as moment from 'moment';
 import * as React from 'react';
 import { connect } from 'react-redux';
 
@@ -10,6 +11,8 @@ import {
 } from '../actions';
 
 import FormGroup from '../components/FormGroup';
+
+moment.locale('fr');
 
 interface Props {
   selectedPost?: Post;
@@ -72,22 +75,23 @@ class Scheduler extends React.Component<AllProps> {
 
   close() {
     this.setState(initialState);
-    this.props.history.replace('/');
+    this.props.history.push('/');
   }
 
   render() {
     const { selectedPost: { title = '', description = '' } } = this.state;
 
     return (
-      <div className="scheduler container">
-        <h2>Scheduler a post</h2>
-        <section>
+      <div className="scheduler post-content container">
+        <h3>Schedule a post</h3>
+        <section className="form">
           <div className="form-fields">
             <FormGroup
               field="title"
               label="Title"
               value={title}
               onChange={this.onTitleChange}
+              style={{ height: 40, lineHeight: 40 }}
             />
 
             <FormGroup
@@ -96,7 +100,7 @@ class Scheduler extends React.Component<AllProps> {
               value={description}
               onChange={this.onDescriptionChange}
             >
-              <textarea rows={10} />
+              <textarea rows={5} />
             </FormGroup>
           </div>
           <div className="form-buttons">

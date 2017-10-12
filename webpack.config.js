@@ -19,6 +19,8 @@ module.exports = {
         return context && context.indexOf('node_modules') >= 0;
       },
     }),
+    // new webpack.ContextReplacementPlugin(/\.\/locale$/, 'empty-module', false, /js$/),
+    new webpack.IgnorePlugin(/\.\/locale$/),    
   ],
   output: {
     path: path.join(__dirname, 'public'),
@@ -31,6 +33,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      moment$: 'moment/moment.js',
+    },
   },
   devServer: {
     historyApiFallback: true,

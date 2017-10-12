@@ -1,0 +1,20 @@
+.form {
+  input, textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+  }
+
+  .form-group {
+    margin-top: 20px;
+  }
+
+  .form-buttons {
+    text-align: right;
+
+    button {
+      @extend %h3;
+      border: 1px solid rgba(0,0,0,0.1);
+      outline: none;
+    }
+  }
+}
