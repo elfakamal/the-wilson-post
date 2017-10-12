@@ -2,7 +2,7 @@
   "name": "the-wilson-post",
   "version": "0.1.0",
   "main": "index.js",
-  "repository": "git@bitbucket.org:elfakamal/the-wilson-post.git",
+  "repository": "git@github.com:elfakamal/the-wilson-post.git",
   "author": "Kamal Farsaoui <elfa.kamal@gmail.com>",
   "license": "MIT",
   "scripts": {
