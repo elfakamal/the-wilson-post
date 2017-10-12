@@ -56,74 +56,20 @@ exports.errorSchedulePost = function (error) {
 
 /***/ }),
 
-/***/ 170:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(8);
-var dateOptions = {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-};
-var timeOptions = {
-    hour: '2-digit',
-    minute: '2-digit',
-};
-var default_1 = /** @class */ (function (_super) {
-    __extends(default_1, _super);
-    function default_1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    default_1.prototype.render = function () {
-        var _a = this.props.post, post = _a === void 0 ? {} : _a;
-        var date = new Date(post.date);
-        console.log('DATE', date.toLocaleString('fr-FR', dateOptions));
-        return (React.createElement("div", { className: "posts-teaser slice", key: post.id },
-            React.createElement("div", { className: "container" },
-                React.createElement("h2", { className: "posts-title" }, post.title),
-                React.createElement("time", { className: "posts-date meta" },
-                    React.createElement("span", { className: "meta-content" },
-                        date.toLocaleString('en-US', dateOptions),
-                        ' at ',
-                        date.toLocaleTimeString('en-US', timeOptions),
-                        post.author)),
-                React.createElement("p", null, post.description))));
-    };
-    default_1.displayName = 'Post';
-    return default_1;
-}(React.Component));
-exports.default = default_1;
-
-
-/***/ }),
-
-/***/ 219:
+/***/ 218:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(8);
-var react_dom_1 = __webpack_require__(234);
+var react_dom_1 = __webpack_require__(233);
 var react_redux_1 = __webpack_require__(90);
 var react_router_config_1 = __webpack_require__(159);
 var react_router_dom_1 = __webpack_require__(97);
 var constants_1 = __webpack_require__(107);
-var routes_1 = __webpack_require__(380);
-var dev_1 = __webpack_require__(387);
+var routes_1 = __webpack_require__(379);
+var dev_1 = __webpack_require__(388);
 var win = window;
 var state = win && win.__INITIAL_STATE__ ? win.__INITIAL_STATE__ : constants_1.INITIAL_STATE;
 var store = dev_1.default(state);
@@ -133,16 +79,16 @@ react_dom_1.render(React.createElement(react_redux_1.Provider, { store: store },
 
 /***/ }),
 
-/***/ 380:
+/***/ 379:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var App_1 = __webpack_require__(381);
-var Home_1 = __webpack_require__(383);
+var App_1 = __webpack_require__(380);
+var Home_1 = __webpack_require__(382);
 var Scheduler_1 = __webpack_require__(384);
-var NotFound_1 = __webpack_require__(385);
+var NotFound_1 = __webpack_require__(386);
 exports.default = [
     {
         component: App_1.default,
@@ -168,7 +114,7 @@ exports.default = [
 
 /***/ }),
 
-/***/ 381:
+/***/ 380:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -186,7 +132,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(8);
 var react_router_config_1 = __webpack_require__(159);
-var Header_1 = __webpack_require__(382);
+var Header_1 = __webpack_require__(381);
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
     function App() {
@@ -205,7 +151,7 @@ exports.default = App;
 
 /***/ }),
 
-/***/ 382:
+/***/ 381:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -249,7 +195,7 @@ exports.default = Header;
 
 /***/ }),
 
-/***/ 383:
+/***/ 382:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -267,7 +213,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(8);
 var react_redux_1 = __webpack_require__(90);
-var Post_1 = __webpack_require__(170);
+var Post_1 = __webpack_require__(383);
 var mapStateToProps = function (state) { return ({
     posts: state.posts,
 }); };
@@ -293,7 +239,7 @@ exports.default = react_redux_1.connect(mapStateToProps, {})(Home);
 
 /***/ }),
 
-/***/ 384:
+/***/ 383:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -310,28 +256,125 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(8);
+var dateOptions = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+};
+var timeOptions = {
+    hour: '2-digit',
+    minute: '2-digit',
+};
+var default_1 = /** @class */ (function (_super) {
+    __extends(default_1, _super);
+    function default_1() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    default_1.prototype.render = function () {
+        var _a = this.props.post, post = _a === void 0 ? {} : _a;
+        var date = new Date(post.date);
+        return (React.createElement("div", { className: "posts-teaser slice", key: post.id },
+            React.createElement("div", { className: "container" },
+                React.createElement("h2", { className: "posts-title" }, post.title),
+                React.createElement("time", { className: "posts-date meta" },
+                    React.createElement("span", { className: "meta-content" },
+                        date.toLocaleString('en-US', dateOptions),
+                        ' at ',
+                        date.toLocaleTimeString('en-US', timeOptions),
+                        post.author)),
+                React.createElement("p", null, post.description))));
+    };
+    default_1.displayName = 'Post';
+    return default_1;
+}(React.Component));
+exports.default = default_1;
+
+
+/***/ }),
+
+/***/ 384:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(8);
 var react_redux_1 = __webpack_require__(90);
 var actions_1 = __webpack_require__(108);
-var Post_1 = __webpack_require__(170);
-var mapStateToProps = function (state) { return ({
-    posts: state.posts,
-}); };
+var FormGroup_1 = __webpack_require__(385);
+var mapStateToProps = function (_a) {
+    var selectedPost = _a.selectedPost;
+    return ({
+        selectedPost: selectedPost,
+    });
+};
 var mapDispatchToProps = {
     requestSchedulePost: actions_1.requestSchedulePost,
+};
+var initialState = {
+    selectedPost: {
+        title: '',
+        description: '',
+    },
 };
 var Scheduler = /** @class */ (function (_super) {
     __extends(Scheduler, _super);
     function Scheduler(props) {
         var _this = _super.call(this, props) || this;
-        _this.renderPost = _this.renderPost.bind(_this);
+        _this.state = initialState;
+        _this.onTitleChange = _this.onTitleChange.bind(_this);
+        _this.onDescriptionChange = _this.onDescriptionChange.bind(_this);
+        _this.close = _this.close.bind(_this);
         return _this;
     }
-    Scheduler.prototype.renderPost = function (post) {
-        return (React.createElement(Post_1.default, { post: post, key: post.id }));
+    Scheduler.prototype.componentWillReceiveProps = function (nextProps) {
+        this.setState(__assign({}, nextProps.selectedPost));
+    };
+    Scheduler.prototype.onTitleChange = function (event) {
+        this.setState({
+            selectedPost: __assign({}, this.state.selectedPost, { title: event.currentTarget.value }),
+        });
+    };
+    Scheduler.prototype.onDescriptionChange = function (event) {
+        this.setState({
+            selectedPost: __assign({}, this.state.selectedPost, { description: event.currentTarget.value }),
+        });
+    };
+    Scheduler.prototype.close = function () {
+        this.setState(initialState);
+        this.props.history.replace('/');
     };
     Scheduler.prototype.render = function () {
-        return (React.createElement("div", { className: "wilson-post-home" },
-            React.createElement("h2", null, "Welcome to the scheduler")));
+        var _a = this.state.selectedPost, _b = _a.title, title = _b === void 0 ? '' : _b, _c = _a.description, description = _c === void 0 ? '' : _c;
+        return (React.createElement("div", { className: "scheduler container" },
+            React.createElement("h2", null, "Scheduler a post"),
+            React.createElement("section", null,
+                React.createElement("div", { className: "form-fields" },
+                    React.createElement(FormGroup_1.default, { field: "title", label: "Title", value: title, onChange: this.onTitleChange }),
+                    React.createElement(FormGroup_1.default, { field: "description", label: "Description", value: description, onChange: this.onDescriptionChange },
+                        React.createElement("textarea", { rows: 10 }))),
+                React.createElement("div", { className: "form-buttons" },
+                    React.createElement("button", { onClick: this.close }, "Cancel"),
+                    ' ',
+                    React.createElement("button", null, "Save")))));
     };
     return Scheduler;
 }(React.Component));
@@ -347,14 +390,33 @@ exports.default = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(Sch
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(8);
-var Status_1 = __webpack_require__(386);
+var FormGroup = function (_a) {
+    var field = _a.field, label = _a.label, value = _a.value, onChange = _a.onChange, children = _a.children;
+    return (React.createElement("div", { className: "form-group" },
+        React.createElement("div", null,
+            React.createElement("label", { htmlFor: field }, label)),
+        children ? React.cloneElement(children, { value: value, onChange: onChange }) : (React.createElement("input", { value: value, onChange: onChange }))));
+};
+exports.default = FormGroup;
+
+
+/***/ }),
+
+/***/ 386:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(8);
+var Status_1 = __webpack_require__(387);
 exports.default = function () { return (React.createElement(Status_1.default, { status: 404 },
     React.createElement("div", null, "Not found"))); };
 
 
 /***/ }),
 
-/***/ 386:
+/***/ 387:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -376,17 +438,17 @@ exports.default = function (_a) {
 
 /***/ }),
 
-/***/ 387:
+/***/ 388:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var redux_1 = __webpack_require__(152);
-var redux_logger_1 = __webpack_require__(388);
-var redux_observable_1 = __webpack_require__(171);
-var epics_1 = __webpack_require__(395);
-var reducers_1 = __webpack_require__(675);
+var redux_logger_1 = __webpack_require__(389);
+var redux_observable_1 = __webpack_require__(170);
+var epics_1 = __webpack_require__(396);
+var reducers_1 = __webpack_require__(676);
 var enhancer;
 var epicMiddleware = redux_observable_1.createEpicMiddleware(epics_1.default);
 var hasDevtools = Boolean(typeof window !== 'undefined' &&
@@ -403,16 +465,16 @@ exports.default = function (initialState) { return (redux_1.createStore(reducers
 
 /***/ }),
 
-/***/ 395:
+/***/ 396:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var redux_observable_1 = __webpack_require__(171);
-var Rx = __webpack_require__(396);
+var redux_observable_1 = __webpack_require__(170);
+var Rx = __webpack_require__(397);
 var actions_1 = __webpack_require__(108);
-var posts_1 = __webpack_require__(670);
+var posts_1 = __webpack_require__(671);
 var getPostsEpic = function (action$) {
     return action$.ofType(actions_1.POSTS_REQUEST)
         .mergeMap(function () { return (Rx.Observable.fromPromise(posts_1.getPosts())
@@ -429,7 +491,7 @@ exports.default = redux_observable_1.combineEpics(getPostsEpic, addPostEpic);
 
 /***/ }),
 
-/***/ 670:
+/***/ 671:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -471,9 +533,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var urlJoin = __webpack_require__(671);
+var urlJoin = __webpack_require__(672);
 var constants_1 = __webpack_require__(107);
-var Request_1 = __webpack_require__(672);
+var Request_1 = __webpack_require__(673);
 exports.getPosts = function () { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -498,7 +560,7 @@ exports.addPost = function (post) { return __awaiter(_this, void 0, void 0, func
 
 /***/ }),
 
-/***/ 672:
+/***/ 673:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -548,7 +610,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(673);
+__webpack_require__(674);
 var methods = ['get', 'post', 'put', 'patch', 'delete'];
 exports.default = methods.reduce(function (Request, method) {
     return (__assign({}, Request, (_a = {}, _a[method] = function (endpoint, requestBody) { return __awaiter(_this, void 0, void 0, function () {
@@ -585,7 +647,7 @@ exports.default = methods.reduce(function (Request, method) {
 
 /***/ }),
 
-/***/ 675:
+/***/ 676:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -622,6 +684,6 @@ var _a;
 
 /***/ })
 
-},[219]);
+},[218]);
 });
 //# sourceMappingURL=main.js.map
