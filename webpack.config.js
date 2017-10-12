@@ -7,21 +7,10 @@ const mode = NODE_ENV === 'development' ? 'dev' : 'dev';
 module.exports = {
   devtool: 'source-map',
   entry: {
-    styles: path.join(__dirname, 'node_modules', 'antd', 'dist', 'antd.less'),
+    styles: path.join(__dirname, 'src', 'client', 'assets', 'scss', 'main.scss'),
     main: path.join(__dirname, 'src', 'client', `index.${mode}`),
   },
   plugins: [
-    // new webpack.ContextReplacementPlugin(/locale$/, /en/),
-
-    // Fixes warning in moment-with-locales.min.js 
-    //   Module not found: Error: Can't resolve './locale' in ...
-    // new webpack.IgnorePlugin(/\.\/locale$/),
-    // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-
-    // new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
-
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: 'vendor.js',
@@ -45,7 +34,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: './demo',
+    contentBase: './public',
     port: 9001,
     watchOptions: {
       ignored: /node_modules/,
@@ -54,7 +43,6 @@ module.exports = {
     },
   },
   module: {
-    // noParse: [/moment.js/],
     rules: [
       // less
       { test: /\.css$/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }] },

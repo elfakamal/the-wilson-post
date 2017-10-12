@@ -31,7 +31,7 @@ class Home extends React.Component<AllProps> {
     const { posts = [] } = this.props;
 
     return (
-      <div className="wilson-post-home">
+      <div className="wilson-post-home home">
         <div className="wilson-post-list">
           {posts.map(this.renderPost)}
         </div>

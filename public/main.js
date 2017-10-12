@@ -73,6 +73,15 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(8);
+var dateOptions = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+};
+var timeOptions = {
+    hour: '2-digit',
+    minute: '2-digit',
+};
 var default_1 = /** @class */ (function (_super) {
     __extends(default_1, _super);
     function default_1() {
@@ -80,12 +89,18 @@ var default_1 = /** @class */ (function (_super) {
     }
     default_1.prototype.render = function () {
         var _a = this.props.post, post = _a === void 0 ? {} : _a;
-        return (React.createElement("section", { className: "wilson-post" },
-            React.createElement("header", null,
-                React.createElement("h3", null, post.title)),
-            React.createElement("p", null, post.description),
-            React.createElement("div", { className: "wilson-post-buttons" },
-                React.createElement("button", null, "Edit"))));
+        var date = new Date(post.date);
+        console.log('DATE', date.toLocaleString('fr-FR', dateOptions));
+        return (React.createElement("div", { className: "posts-teaser slice", key: post.id },
+            React.createElement("div", { className: "container" },
+                React.createElement("h2", { className: "posts-title" }, post.title),
+                React.createElement("time", { className: "posts-date meta" },
+                    React.createElement("span", { className: "meta-content" },
+                        date.toLocaleString('en-US', dateOptions),
+                        ' at ',
+                        date.toLocaleTimeString('en-US', timeOptions),
+                        post.author)),
+                React.createElement("p", null, post.description))));
     };
     default_1.displayName = 'Post';
     return default_1;
@@ -95,20 +110,20 @@ exports.default = default_1;
 
 /***/ }),
 
-/***/ 212:
+/***/ 219:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(8);
-var react_dom_1 = __webpack_require__(227);
+var react_dom_1 = __webpack_require__(234);
 var react_redux_1 = __webpack_require__(90);
 var react_router_config_1 = __webpack_require__(159);
 var react_router_dom_1 = __webpack_require__(97);
 var constants_1 = __webpack_require__(107);
-var routes_1 = __webpack_require__(373);
-var dev_1 = __webpack_require__(379);
+var routes_1 = __webpack_require__(380);
+var dev_1 = __webpack_require__(387);
 var win = window;
 var state = win && win.__INITIAL_STATE__ ? win.__INITIAL_STATE__ : constants_1.INITIAL_STATE;
 var store = dev_1.default(state);
@@ -118,16 +133,16 @@ react_dom_1.render(React.createElement(react_redux_1.Provider, { store: store },
 
 /***/ }),
 
-/***/ 373:
+/***/ 380:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var App_1 = __webpack_require__(374);
-var Home_1 = __webpack_require__(375);
-var Scheduler_1 = __webpack_require__(376);
-var NotFound_1 = __webpack_require__(377);
+var App_1 = __webpack_require__(381);
+var Home_1 = __webpack_require__(383);
+var Scheduler_1 = __webpack_require__(384);
+var NotFound_1 = __webpack_require__(385);
 exports.default = [
     {
         component: App_1.default,
@@ -153,7 +168,7 @@ exports.default = [
 
 /***/ }),
 
-/***/ 374:
+/***/ 381:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -171,7 +186,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(8);
 var react_router_config_1 = __webpack_require__(159);
-var react_router_dom_1 = __webpack_require__(97);
+var Header_1 = __webpack_require__(382);
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
     function App() {
@@ -180,12 +195,7 @@ var App = /** @class */ (function (_super) {
     App.prototype.render = function () {
         var route = this.props.route;
         return (React.createElement("div", { className: "wilson-post-app" },
-            React.createElement("nav", null,
-                React.createElement("h1", null, "The Wilson Post"),
-                React.createElement("div", { className: "wilson-post-app-navigation" },
-                    React.createElement(react_router_dom_1.Link, { to: "/" }, "Home"),
-                    ' ',
-                    React.createElement(react_router_dom_1.Link, { to: "/schedule-post" }, "Schedule a post"))),
+            React.createElement(Header_1.default, null),
             route && react_router_config_1.renderRoutes(route.routes)));
     };
     return App;
@@ -195,7 +205,51 @@ exports.default = App;
 
 /***/ }),
 
-/***/ 375:
+/***/ 382:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(8);
+var react_router_dom_1 = __webpack_require__(97);
+var Header = /** @class */ (function (_super) {
+    __extends(Header, _super);
+    function Header() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Header.prototype.shouldComponentUpdate = function () {
+        return false;
+    };
+    Header.prototype.render = function () {
+        return (React.createElement("div", { className: "site-header" },
+            React.createElement("div", { className: "branding-container" },
+                React.createElement("a", { href: "/", className: "branding" })),
+            React.createElement("nav", { className: "site-nav" },
+                React.createElement("ul", null,
+                    React.createElement("li", null,
+                        React.createElement(react_router_dom_1.Link, { to: "/" }, "Home")),
+                    React.createElement("li", null,
+                        React.createElement(react_router_dom_1.Link, { to: "/schedule-post" }, "Schedule a post"))))));
+    };
+    return Header;
+}(React.Component));
+exports.default = Header;
+
+
+/***/ }),
+
+/***/ 383:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -229,7 +283,7 @@ var Home = /** @class */ (function (_super) {
     };
     Home.prototype.render = function () {
         var _a = this.props.posts, posts = _a === void 0 ? [] : _a;
-        return (React.createElement("div", { className: "wilson-post-home" },
+        return (React.createElement("div", { className: "wilson-post-home home" },
             React.createElement("div", { className: "wilson-post-list" }, posts.map(this.renderPost))));
     };
     return Home;
@@ -239,7 +293,7 @@ exports.default = react_redux_1.connect(mapStateToProps, {})(Home);
 
 /***/ }),
 
-/***/ 376:
+/***/ 384:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -286,21 +340,21 @@ exports.default = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(Sch
 
 /***/ }),
 
-/***/ 377:
+/***/ 385:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(8);
-var Status_1 = __webpack_require__(378);
+var Status_1 = __webpack_require__(386);
 exports.default = function () { return (React.createElement(Status_1.default, { status: 404 },
     React.createElement("div", null, "Not found"))); };
 
 
 /***/ }),
 
-/***/ 378:
+/***/ 386:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -322,17 +376,17 @@ exports.default = function (_a) {
 
 /***/ }),
 
-/***/ 379:
+/***/ 387:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var redux_1 = __webpack_require__(152);
-var redux_logger_1 = __webpack_require__(380);
+var redux_logger_1 = __webpack_require__(388);
 var redux_observable_1 = __webpack_require__(171);
-var epics_1 = __webpack_require__(387);
-var reducers_1 = __webpack_require__(667);
+var epics_1 = __webpack_require__(395);
+var reducers_1 = __webpack_require__(675);
 var enhancer;
 var epicMiddleware = redux_observable_1.createEpicMiddleware(epics_1.default);
 var hasDevtools = Boolean(typeof window !== 'undefined' &&
@@ -349,16 +403,16 @@ exports.default = function (initialState) { return (redux_1.createStore(reducers
 
 /***/ }),
 
-/***/ 387:
+/***/ 395:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var redux_observable_1 = __webpack_require__(171);
-var Rx = __webpack_require__(388);
+var Rx = __webpack_require__(396);
 var actions_1 = __webpack_require__(108);
-var posts_1 = __webpack_require__(662);
+var posts_1 = __webpack_require__(670);
 var getPostsEpic = function (action$) {
     return action$.ofType(actions_1.POSTS_REQUEST)
         .mergeMap(function () { return (Rx.Observable.fromPromise(posts_1.getPosts())
@@ -375,7 +429,7 @@ exports.default = redux_observable_1.combineEpics(getPostsEpic, addPostEpic);
 
 /***/ }),
 
-/***/ 662:
+/***/ 670:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -417,9 +471,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var urlJoin = __webpack_require__(663);
+var urlJoin = __webpack_require__(671);
 var constants_1 = __webpack_require__(107);
-var Request_1 = __webpack_require__(664);
+var Request_1 = __webpack_require__(672);
 exports.getPosts = function () { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -444,7 +498,7 @@ exports.addPost = function (post) { return __awaiter(_this, void 0, void 0, func
 
 /***/ }),
 
-/***/ 664:
+/***/ 672:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -494,7 +548,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(665);
+__webpack_require__(673);
 var methods = ['get', 'post', 'put', 'patch', 'delete'];
 exports.default = methods.reduce(function (Request, method) {
     return (__assign({}, Request, (_a = {}, _a[method] = function (endpoint, requestBody) { return __awaiter(_this, void 0, void 0, function () {
@@ -531,7 +585,7 @@ exports.default = methods.reduce(function (Request, method) {
 
 /***/ }),
 
-/***/ 667:
+/***/ 675:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -568,6 +622,6 @@ var _a;
 
 /***/ })
 
-},[212]);
+},[219]);
 });
 //# sourceMappingURL=main.js.map

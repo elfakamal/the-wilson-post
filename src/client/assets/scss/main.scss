@@ -1,25 +1,32 @@
-.post {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  width: 80%;
+// Settings
+@import 'settings/fonts';
+@import 'settings/variables';
 
-  header {
-    display: flex;
-    flex-direction: row;
-    background: aliceblue;
-    margin-top: 15px;
-    padding: 10px;
+// External
+@import 'external/reset';
+@import 'external/syntax';
 
-    h3 {
-      flex-grow: 1;
+// Base
+@import 'base/global';
+@import 'base/utility';
 
-      & + div {
-        align-content: center;
-        align-items: center;
-        display: flex;
-        flex-grow: 0;
-      }
-    }
-  }
-}
+// objects
+@import 'objects/layout';
+@import 'objects/meta';
+@import 'objects/buttons';
+@import 'objects/page-heading';
+@import 'objects/read-also';
+@import 'objects/search-bar';
+@import 'objects/avatar';
+@import 'objects/newsletter';
+@import 'objects/splash';
+
+// Posts
+@import 'layouts/posts';
+@import 'layouts/index';
+
+// Partials
+@import 'includes/header';
+@import 'includes/footer';
+@import 'includes/md-content';
+@import 'includes/author';

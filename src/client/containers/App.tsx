@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { renderRoutes, RouteConfig } from 'react-router-config';
-import { Link } from 'react-router-dom';
+
+import Header from '../components/Header';
 
 interface Props {
   route?: RouteConfig;
@@ -12,14 +13,7 @@ export default class App extends React.Component<Props, object> {
 
     return (
       <div className="wilson-post-app">
-        <nav>
-          <h1>The Wilson Post</h1>
-          <div className="wilson-post-app-navigation">
-            <Link to="/">Home</Link>
-            {' '}
-            <Link to="/schedule-post">Schedule a post</Link>
-          </div>
-        </nav>
+        <Header />
         {route && renderRoutes(route.routes)}
       </div>
     );
