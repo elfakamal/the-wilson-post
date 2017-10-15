@@ -9,6 +9,9 @@ import { INITIAL_STATE } from './constants';
 import routes from './routes';
 import createStore from './store/dev';
 
+import 'react-dates/lib/css/_datepicker.css';
+import './assets/scss/main.scss';
+
 const win: ExtendedWindow = window as ExtendedWindow;
 const state = win && win.__INITIAL_STATE__ ? win.__INITIAL_STATE__ : INITIAL_STATE;
 const store = createStore(state);

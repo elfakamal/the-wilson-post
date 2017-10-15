@@ -1,9 +1,9 @@
 import { Post, State } from 'common';
+import { History } from 'history';
 import * as moment from 'moment';
 import * as React from 'react';
+import { SingleDatePicker } from 'react-dates';
 import { connect } from 'react-redux';
-
-import { History } from 'history';
 
 import {
   requestSchedulePost,
@@ -15,8 +15,17 @@ import FormGroup from '../components/FormGroup';
 moment.locale('fr');
 
 interface Props {
-  selectedPost?: Post;
+  title?: string;
+  description?: string;
+  date?: number;
   history: History;
+}
+
+interface InternalState {
+  title?: string;
+  description?: string;
+  date: moment.Moment;
+  focused: boolean;
 }
 
 interface DispatchProps {
@@ -33,14 +42,14 @@ const mapDispatchToProps: DispatchProps = {
 
 type AllProps = Readonly<State & DispatchProps & Props>;
 
-const initialState = {
-  selectedPost: {
-    title: '',
-    description: '',
-  } as Post,
+const initialState: InternalState = {
+  title: '',
+  description: '',
+  date: moment().add(1, 'day'),
+  focused: false,
 };
 
-class Scheduler extends React.Component<AllProps> {
+class Scheduler extends React.Component<AllProps, InternalState> {
   state = initialState;
 
   constructor(props: AllProps) {
@@ -52,25 +61,18 @@ class Scheduler extends React.Component<AllProps> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    this.setState({ ...nextProps.selectedPost });
+    this.setState({
+      title: nextProps.title,
+      description: nextProps.description,
+    });
   }
 
   onTitleChange(event: React.SyntheticEvent<HTMLInputElement>) {
-    this.setState({
-      selectedPost: {
-        ...this.state.selectedPost,
-        title: event.currentTarget.value,
-      },
-    });
+    this.setState({ title: event.currentTarget.value });
   }
 
   onDescriptionChange(event: React.SyntheticEvent<HTMLTextAreaElement>) {
-    this.setState({
-      selectedPost: {
-        ...this.state.selectedPost,
-        description: event.currentTarget.value,
-      },
-    });
+    this.setState({ description: event.currentTarget.value });
   }
 
   close() {
@@ -79,7 +81,7 @@ class Scheduler extends React.Component<AllProps> {
   }
 
   render() {
-    const { selectedPost: { title = '', description = '' } } = this.state;
+    const { title = '', description = '' } = this.state;
 
     return (
       <div className="scheduler post-content container">
@@ -102,6 +104,16 @@ class Scheduler extends React.Component<AllProps> {
             >
               <textarea rows={5} />
             </FormGroup>
+
+            <div>
+              <SingleDatePicker
+                id="date-picker-de-ouf"
+                date={this.state.date}
+                onDateChange={date => this.setState({ date: date || initialState.date })}
+                focused={this.state.focused}
+                onFocusChange={({ focused }) => this.setState({ focused: focused || false })}
+              />
+            </div>
           </div>
           <div className="form-buttons">
             <button onClick={this.close}>Cancel</button>

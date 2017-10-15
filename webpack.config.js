@@ -1,16 +1,25 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
 const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV.toLowerCase() : 'development';
 const mode = NODE_ENV === 'development' ? 'dev' : 'dev';
 
+
+// Create multiple instances
+const extractSCSS = new ExtractTextPlugin('app.css');
+const extractCSS = new ExtractTextPlugin('vendor.css');
+
 module.exports = {
   devtool: 'source-map',
   entry: {
-    styles: path.join(__dirname, 'src', 'client', 'assets', 'scss', 'main.scss'),
+    // styles: path.join(__dirname, 'src', 'client', 'assets', 'scss', 'main.scss'),
+    // styles: path.join(__dirname, 'node_modules', 'react-dates', 'lib', 'css', '_datepicker.css'),
     main: path.join(__dirname, 'src', 'client', `index.${mode}`),
   },
   plugins: [
+    extractCSS,
+    extractSCSS,
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: 'vendor.js',
@@ -19,7 +28,6 @@ module.exports = {
         return context && context.indexOf('node_modules') >= 0;
       },
     }),
-    // new webpack.ContextReplacementPlugin(/\.\/locale$/, 'empty-module', false, /js$/),
     new webpack.IgnorePlugin(/\.\/locale$/),    
   ],
   output: {
@@ -50,7 +58,10 @@ module.exports = {
   module: {
     rules: [
       // less
-      { test: /\.css$/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }] },
+      {
+        test: /\.css$/, 
+        use: extractCSS.extract(['css-loader']),
+      },
       {
         test: /\.less$/,
         use: [
@@ -61,11 +72,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          { loader: 'sass-loader' },
-        ],
+        use: extractSCSS.extract(['css-loader', 'sass-loader']),
       },
       // JS/TS
       // { test: /\.jsx?$/, use: [{ loader: 'babel-loader' }] },

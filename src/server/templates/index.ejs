@@ -7,6 +7,8 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <link href="/static/vendor.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/app.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
     <div id="root"><%- content %></div>
@@ -14,7 +16,6 @@
       window.__INITIAL_STATE__ = <%- JSON.stringify(data) %>;
     </script>
     <script src="/static/vendor.js"></script>
-    <script src="/static/styles.js"></script>
     <script src="/static/main.js"></script>
   </body>
 </html>
