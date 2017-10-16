@@ -1,15 +1,15 @@
 import { Post, State } from 'common';
 import { History } from 'history';
 import * as moment from 'moment';
+import 'moment/locale/fr';
 import * as React from 'react';
-import { SingleDatePicker } from 'react-dates';
+import InfiniteCalendar from 'react-infinite-calendar';
 import { connect } from 'react-redux';
 
 import {
   requestSchedulePost,
   SchedulePostRequestAction,
 } from '../actions';
-
 import FormGroup from '../components/FormGroup';
 
 moment.locale('fr');
@@ -81,16 +81,22 @@ class Scheduler extends React.Component<AllProps, InternalState> {
   }
 
   render() {
+    // const fields = ['_blank', '_headerFormat', '_todayLabel', '_weekdays', '_weekStartsOn'];
+    // const rawLocale = moment.localeData('fr');
+    // const locale = Object.keys(rawLocale).reduce((acc: InfiniteCalendarLocale, key: string) => {
+    //   return acc;
+    // }, {} as InfiniteCalendarLocale);
+
     const { title = '', description = '' } = this.state;
 
     return (
       <div className="scheduler post-content container">
-        <h3>Schedule a post</h3>
+        <h3>Planifier un article</h3>
         <section className="form">
           <div className="form-fields">
             <FormGroup
               field="title"
-              label="Title"
+              label="Titre"
               value={title}
               onChange={this.onTitleChange}
               style={{ height: 40, lineHeight: 40 }}
@@ -105,15 +111,39 @@ class Scheduler extends React.Component<AllProps, InternalState> {
               <textarea rows={5} />
             </FormGroup>
 
-            <div>
-              <SingleDatePicker
-                id="date-picker-de-ouf"
-                date={this.state.date}
-                onDateChange={date => this.setState({ date: date || initialState.date })}
-                focused={this.state.focused}
-                onFocusChange={({ focused }) => this.setState({ focused: focused || false })}
+            <FormGroup field="date" label="Date">
+              <InfiniteCalendar
+                height={400}
+                width="100%"
+                minDate={moment(initialState.date).toDate()}
+                locale={{
+                  // tslint:disable-next-line:no-require-imports
+                  locale: require('date-fns/locale/fr'),
+                  headerFormat: 'dddd, D MMMM',
+                  weekdays: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                  blank: 'Aucune date selectionnée',
+                  todayLabel: {
+                    long: 'Aujourd\'hui',
+                    short: 'Auj.',
+                  },
+                  weekStartsOn: 1,
+                }}
+                theme={{
+                  selectionColor: '#fbe300',
+                  textColor: {
+                    default: '#333',
+                    active: '#333',
+                  },
+                  weekdayColor: '#fbe300',
+                  headerColor: '#efd804',
+                  floatingNav: {
+                    background: '#efd804',
+                    color: '#444',
+                    chevron: '#444',
+                  },
+                }}
               />
-            </div>
+            </FormGroup>
           </div>
           <div className="form-buttons">
             <button onClick={this.close}>Cancel</button>

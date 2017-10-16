@@ -15,10 +15,10 @@ export default class Header extends React.Component<object, object> {
         <nav className="site-nav">
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">Articles</Link>
             </li>
             <li>
-              <Link to="/schedule-post">Schedule a post</Link>
+              <Link to="/schedule-post">Plannifier un article</Link>
             </li>
           </ul>
         </nav>

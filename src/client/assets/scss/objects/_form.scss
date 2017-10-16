@@ -7,9 +7,10 @@
   .form-group {
     margin-top: 20px;
   }
-
+  
   .form-buttons {
     text-align: right;
+    margin-top: 20px;
 
     button {
       @extend %h3;
