@@ -32,7 +32,7 @@ app.use(handler404);
 
 app.listen(port, (error: any) => {
   if (error) {
-    console.error(error);
+    console.error(JSON.stringify(error, null, 2));
   } else {
     // tslint:disable-next-line:max-line-length
     console.info('==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port);
