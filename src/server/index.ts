@@ -12,7 +12,7 @@ import routes from './routes';
 
 const publicPath = path.join(__dirname, '..', '..', 'public');
 const templatesPath = path.join(__dirname, 'templates');
-const port = 9001;
+const port = 8080;
 const app = express();
 
 app.set('views', templatesPath);
