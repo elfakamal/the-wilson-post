@@ -34,5 +34,6 @@ const FormGroup = ({ field, label, value, onChange, style, children }: Props): J
       )}
     </div>
   );
-}
+};
+
 export default FormGroup;

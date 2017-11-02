@@ -23,12 +23,12 @@ declare module 'react-infinite-calendar' {
       hideYearsOnSelect?: boolean;
       layout?: 'portrait' | 'landscape';
       overscanMonthCount?: number;
-  		shouldHeaderAnimate?: boolean;
+      shouldHeaderAnimate?: boolean;
       showHeader?: boolean;
       showMonthsForYears?: boolean;
-  		showOverlay?: boolean;
-  		showTodayHelper?: boolean;
-  		showWeekdays?: boolean;
+      showOverlay?: boolean;
+      showTodayHelper?: boolean;
+      showWeekdays?: boolean;
       todayHelperRowOffset?: number;
     };
     height?: number;
@@ -60,9 +60,9 @@ declare module 'react-infinite-calendar' {
     };
     width?: string | number;
     YearsComponent?: (props: any) => JSX.Element;
-  };
+  }
 
   type GetColor = () => string;
 
-  export default class InfiniteCalendar extends React.Component<InfiniteCalendarProps, object>{}
+  export default class InfiniteCalendar extends React.Component<InfiniteCalendarProps, object> {}
 }
