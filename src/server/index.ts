@@ -1,5 +1,4 @@
 import * as bodyParser from 'body-parser';
-import * as cors from 'cors';
 import * as express from 'express';
 import * as morgan from 'morgan';
 import * as path from 'path';
@@ -20,7 +19,6 @@ app.set('view engine', 'ejs');
 app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
 
 app.use('/static', serveStatic(publicPath));
 app.use('/api', api);
